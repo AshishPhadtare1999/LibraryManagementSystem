@@ -1,0 +1,49 @@
+{% extends 'bookApp/base.html' %}
+
+{%block title %} BookCRUD {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-success ">Add New Book</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Add" class="btn btn-success">
+        </form>
+    </div>
+
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">Show Book Informations.</h4>
+        {% if book %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in book %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.author}}</td>
+                    <td>{{c.price}}</td>
+                    <td>{{c.date}}</td>
+                    <td>
+                        <a href="{% url 'update' c.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'delete' c.id %}" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

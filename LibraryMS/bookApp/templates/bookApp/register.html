@@ -1,0 +1,27 @@
+{% extends 'bookApp/base.html' %}
+
+{%block title %} Registration {% endblock %}
+{% block content %}
+
+<div class="container py-5">
+	<div class="col-sm-4">
+		<h4 class="text-center alert alert-danger ">Registration</h4>
+		<form method="POST">
+			{% csrf_token %}
+			{% for f in form %}
+			{{f.label_tag}} {{f}} {{f.errors|striptags}}</br><br>
+			{% endfor %}
+			<button class="btn btn-primary" type="submit">Register</button>
+		</form>
+	</div>
+	{% if messages %}
+	{% for m in messages %}
+		<p {% if m.tags %} class="{{m.tags}}" {% endif %}>{{m}}</p>
+		
+	{% endfor %}
+	{% endif %}
+	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+</div>
+
+
+{% endblock %}

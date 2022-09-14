@@ -1,0 +1,15 @@
+{% extends 'bookApp/base.html' %}
+
+{%block title %} BookUpdate {% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="col-sm-4">
+            <h4 class="text-center alert alert-success ">Add New Book</h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Add" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+{% endblock %}
